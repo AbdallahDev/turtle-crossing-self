@@ -1,16 +1,35 @@
-# This is a sample Python script.
+from turtle import Screen
+import time
+from random import randint, choice
 
-# Press ⌃R to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
+from car import Car
+from fish import Fish
+from constants import SCREEN_WIDTH, SCREEN_HEIGHT
 
+screen = Screen()
+screen.tracer(0)
+screen.listen()
+screen.setup(width=SCREEN_WIDTH, height=SCREEN_HEIGHT, startx=1)
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
+fish = Fish()
+cars = []
 
+ranges = [(-280, -210), (-210, -140), (-140, -70), (-70, 0), (0, 70), (70, 140), (140, 210), (210, 280)]
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+screen.onkey(fun=fish.move, key='Up')
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+while True:
+    y_range = choice(ranges)
+    y = randint(y_range[0], y_range[1])
+    new_car = Car((280, y))
+    for _ in range(10000000):
+        pass
+    cars.append(new_car)
+
+    for car in cars:
+        car.move()
+
+    screen.update()
+    time.sleep(0.5)
+
+# screen.exitonclick()
