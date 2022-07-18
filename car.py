@@ -2,22 +2,21 @@ import turtle
 from turtle import Turtle
 import random
 
-from constants import SCREEN_WIDTH, SCREEN_HEIGHT
-
 turtle.colormode(255)
 
 
 class Car(Turtle):
-    def __init__(self, position):
+    def __init__(self, car_xcor, moving_distance):
         super().__init__()
         self.set_color()
         self.shape('square')
         self.shapesize(stretch_len=2)
         self.penup()
         self.setheading(180)
-        self.setposition(position)
         self.speed('fastest')
-        # self.set_car_position()
+        self.car_xcor = car_xcor
+        self.set_car_position()
+        self.moving_distance = moving_distance
 
     def set_color(self):
         r = random.randint(0, 250)
@@ -27,14 +26,10 @@ class Car(Turtle):
         self.color((r, g, b))
 
     def set_car_position(self):
-        # car_x = SCREEN_WIDTH / 2
-        # y_edge = (SCREEN_HEIGHT / 2) - 70
-        # car_y = random.randint(-y_edge, y_edge)
-
-        car_x = 300
-        car_y = random.randint(-280, 280)
+        car_x = self.car_xcor
+        car_y = random.randint(-230, 230)
         self.setposition(car_x, car_y)
 
     def move(self):
-        """moves the car from the right to the left"""
-        self.forward(10)
+        """moves the car from the right to the left by a specific distance"""
+        self.forward(self.moving_distance)
